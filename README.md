@@ -5,7 +5,8 @@ Python module to sanity checks SSL certificates on the web. The scripts contain 
 - asn1crypto.x509
 - gmpy2
 
-This is an early version developed by the cybersecurity and privacy group of the National Laboratory of Scientific Computing. In Brazil's branch is the first version of the python module, used to sanity check SSL certificates of .br domains, if you wanna reproduce our results feel free to use the [Brazillian Dataset on Kaggle](https://www.kaggle.com/mattslv/brazil-rsa-sanity-check). Mediterranean's branch is a more complete version, which was used to sanity check the SSL certificates with domains of the Mediterranean countries if you wanna reproduce our results feel free to use the [Mediterranean Dataset on Kaggle](https://www.kaggle.com/mattslv/mediterranean-ssl-digital-certificates). 
+This is an early version developed by the cybersecurity and privacy group of the National Laboratory of Scientific Computing. In Brazil's branch is the first version of the python module, used to sanity check SSL certificates of .br domains, if you wanna reproduce our results feel free to use our [Brazillian Dataset on Kaggle](https://www.kaggle.com/mattslv/brazil-rsa-sanity-check). Mediterranean's branch is a more complete version, which was used to sanity check the SSL certificates with domains of the Mediterranean countries if you wanna reproduce our results feel free to use our [Mediterranean Dataset on Kaggle](https://www.kaggle.com/mattslv/mediterranean-ssl-digital-certificates). 
+
 Please, feel free to submit a pull request or email to aranha@cos.ufrj.br if you have trouble or need help for your application.
 
 ## Documentation
