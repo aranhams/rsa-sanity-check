@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+/src/__pycache__/
+/lib/
+/bin/
+main.py
+pyvenv.cfg
