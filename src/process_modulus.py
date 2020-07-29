@@ -1,6 +1,6 @@
 import graphic as g
 
-def ffmethod(ModulusFile='../data/rsa_data.csv'):
+def ffmethod(ModulusFile='../data/rsa_data_uniq.csv'):
 
     print("[Fermat's factorization method]\n")
 
@@ -20,6 +20,7 @@ def ffmethod(ModulusFile='../data/rsa_data.csv'):
         n = gmpy2.mpz(module, base=16)
         a = gmpy2.isqrt(n)+1
         b2 = a*a-n
+
         count = 0
         while (not(gmpy2.is_square(b2))) & (count <= 100):
             a = a+1
@@ -31,8 +32,8 @@ def ffmethod(ModulusFile='../data/rsa_data.csv'):
             p = a-b
             q = a+b
             RSADataOutput.write('%x' %str(n)+"\t"+'%x' %str(p)+"\t"+'%x' %str(q)+"\n")
-        i+=1
 
+        i+=1
         g.print_progress_bar(ax, size, prefix = 'Progress:', suffix = 'Complete', length = 50)
     
     TEnd = time.time()
@@ -42,7 +43,7 @@ def ffmethod(ModulusFile='../data/rsa_data.csv'):
     RSADataOutput.close()
 
 
-def calc_gcd(ModulusFile='../data/rsa_data.txt'):
+def calc_gcd(ModulusFile='../data/rsa_data_uniq.txt'):
 
     print("[Calculating GCD\n]")
 
@@ -192,4 +193,3 @@ def product_tree(Modulus, Size):
     print("Time used (Building the Tree): ", TEnd - TStart)
         
     return T
-
