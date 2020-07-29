@@ -24,7 +24,6 @@ def process_certificates(CertificateData):
                     +str(CertificateData[14])+','+str(CertificateData[15])+'\n')
                 ECPubKeyFile.write(str(CertificateData[5])+'\n')  
         except Exception:
-            #pass
             error = traceback.format_exc()
             ErrorLine = error.split('\n')
             LogFile.write('[ERROR] -  to obtain the certificate\nDomain: %s\nType of error: %s\n'\
