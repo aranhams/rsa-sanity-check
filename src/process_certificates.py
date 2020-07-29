@@ -8,8 +8,7 @@ def process_certificates(CertificateData):
     LogFile = open('../data/log.csv', 'a')
 
     for Domain in CertificateData[0]:
-        try:
-            # self.lock.acquire()
+        try:          
             if CertificateData[1] == 'rsa':
                 DataFile.write(str(Domain)+','+str(CertificateData[1])+','+str(CertificateData[2])+','\
                     +str(CertificateData[3])+','+str(CertificateData[6])+','+str(CertificateData[7])+','\
@@ -24,7 +23,6 @@ def process_certificates(CertificateData):
                     +str(CertificateData[11])+','+str(CertificateData[12])+','+str(CertificateData[13])+','\
                     +str(CertificateData[14])+','+str(CertificateData[15])+'\n')
                 ECPubKeyFile.write(str(CertificateData[5])+'\n')  
-            # self.lock.release()
         except Exception:
             #pass
             error = traceback.format_exc()
