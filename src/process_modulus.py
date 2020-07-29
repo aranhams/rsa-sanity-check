@@ -1,10 +1,15 @@
+import os
+import time
+import math
+import gmpy2
 import graphic as g
+
 
 def ffmethod(ModulusFile='../data/rsa_data_uniq.csv'):
 
     print("[Fermat's factorization method]\n")
 
-    with open(modulus_file) as f:
+    with open(ModulusFile) as f:
         size = sum(1 for _ in f)
 
     RSAData = open(ModulusFile, 'r')
@@ -16,8 +21,8 @@ def ffmethod(ModulusFile='../data/rsa_data_uniq.csv'):
     
     g.print_progress_bar(ax, size, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
-    for Module in f:
-        n = gmpy2.mpz(module, base=16)
+    for Module in RSAData:
+        n = gmpy2.mpz(Module, base=16)
         a = gmpy2.isqrt(n)+1
         b2 = a*a-n
 
@@ -33,7 +38,7 @@ def ffmethod(ModulusFile='../data/rsa_data_uniq.csv'):
             q = a+b
             RSADataOutput.write('%x' %str(n)+"\t"+'%x' %str(p)+"\t"+'%x' %str(q)+"\n")
 
-        i+=1
+        ax += 1
         g.print_progress_bar(ax, size, prefix = 'Progress:', suffix = 'Complete', length = 50)
     
     TEnd = time.time()
@@ -43,17 +48,17 @@ def ffmethod(ModulusFile='../data/rsa_data_uniq.csv'):
     RSADataOutput.close()
 
 
-def calc_gcd(ModulusFile='../data/rsa_data_uniq.txt'):
+def calc_gcd(ModulusFile='../data/rsa_data_uniq.csv'):
 
-    print("[Calculating GCD\n]")
+    print("[Calculating GCD]\n")
 
     Modulus = []
     Size = 0
 
     with open(ModulusFile) as f:
         for domain in f:
-            size += 1
-            Modulus.append(mpz(domain.strip(),16))
+            Size += 1
+            Modulus.append(gmpy2.mpz(domain.strip(),16))
     compute_gcd(Modulus, Size)
 
 
@@ -67,11 +72,11 @@ def compute_gcd(Modulus, Size):
         S.append(Modulus[i])
         
     S = Modulus[:]
-    T = product_tree(modulus,size)
+    T = product_tree(Modulus, Size)
 
     TempOutput = open('../data/output.csv', 'a')
     
-    [subfolders] = os.walk('./Tree')
+    [subfolders] = os.walk('../data/tree')
     
     k = 0
     h = len(subfolders[2]) - 1
@@ -80,7 +85,7 @@ def compute_gcd(Modulus, Size):
     while h >= 0:
         URL = '../data/tree/'+str((h))+'.txt'
 
-        Tree = open(url,'r')
+        Tree = open(URL, 'r')
         TLines = Tree.readlines()
         
         if k == 0:
@@ -130,7 +135,8 @@ def compute_gcd(Modulus, Size):
             a = '%x' %str(S[i])
             b = '%x' %str(gcd(Tr[len(Tr)-1][i],S[i]))
             out.write(a+","+b+"\n")
-        self.printProgressBar(i+1, len(Tr[len(Tr)-1]), prefix = 'Progress:', suffix = 'Complete', length = 50)
+
+        g.print_progress_bar(i+1, len(Tr[len(Tr)-1]), prefix = 'Progress:', suffix = 'Complete', length = 50)
     
     TempOutput.close()
 
@@ -144,20 +150,20 @@ def product_tree(Modulus, Size):
     TStart = time.time()
     
     os.mkdir('../data/tree')
-    URL = '../data/Tree/'+str((0))+'.txt'
+    URL = '../data/tree/'+str((0))+'.txt'
 
     Tree = open(URL, 'w')
     for i in range(len(Modulus)):
-        a = modulus[i]    
+        a = Modulus[i]    
         Tree.write(str(a)+'\t')
     Tree.write('\n')
 
     Tree.close() 
 
-    T.append(modulus)
+    T.append(Modulus)
 
-    print("[Tree height: %i \n]" % (int(math.ceil(math.log(Size, 2)))-1))
-    for i in range(int(math.ceil(math.log(Size,2)))):
+    print("[Tree height: %i]\n" % (int(math.ceil(math.log(Size, 2)))-1))
+    for i in range(int(math.ceil(math.log(Size, 2)))):
         print("\t [Level %d of %d]" % (int(math.ceil(math.log(Size, 2)))-1 - i,int(math.ceil(math.log(Size, 2)))-1))
 
         m = []

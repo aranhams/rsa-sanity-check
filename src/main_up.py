@@ -1,7 +1,7 @@
 from os import listdir, system
 from os.path import isfile, join
 import certificate_handling as ch
-
+import process_modulus as pm
 
 def menu():
     
@@ -29,6 +29,11 @@ if __name__ == '__main__':
         system("sort ../data/ec_data.csv | uniq -u > ../data/ec_data_uniq.csv")
         print("Done")
     elif (Option == '2'):
-        pass
+        print("Calculating GCD among the certificate moduli, this will take a long time, so get a coffee.")
+
+        pm.ffmethod()
+        pm.calc_gcd()
+
+        print("Done")
     else:
         print("Invalid option")
