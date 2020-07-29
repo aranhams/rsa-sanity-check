@@ -1,4 +1,5 @@
 import gzip
+import math
 import ssl
 import os
 import asn1crypto.x509 as x509
@@ -45,7 +46,7 @@ def extract_info_certificates(CertificateHasExpired):
             CertificatePubKey = 0 # apenas para EC
             CertificateModulus = Certificate.public_key.native["public_key"]["modulus"]
             CertificatePubExp = Certificate.public_key.native["public_key"]["public_exponent"]
-            CertificateKeySize = int(Certificate.public_key.bit_size)
+            CertificateKeySize = int(math.fabs(Certificate.public_key.bit_size))
         elif CertificateAlgorithm == 'ec' :
             CertificateCurve = Certificate.public_key.native["algorithm"]["parameters"]
             CertificatePubKey = Certificate.public_key.native["public_key"].hex()
@@ -90,8 +91,14 @@ def extract_info_certificates(CertificateHasExpired):
         CertificateSelfSigned = Certificate.self_signed
         CertificateHashAlgorithm = Certificate.hash_algo
         CertificateDomains = Certificate.valid_domains
-        CertificateNotValidBefore = Certificate.native['tbs_certificate']['validity']['not_before']
-        CertificateNotValidAfter = Certificate.native['tbs_certificate']['validity']['not_after']
+        try:
+            CertificateNotValidBefore = Certificate.native['tbs_certificate']['validity']['not_before']
+        except:
+            CertificateNotValidBefore = "Empty"
+        try:
+            CertificateNotValidAfter = Certificate.native['tbs_certificate']['validity']['not_after']
+        except:
+            CertificateNotValidAfter = "Empty"
         
         os.remove(str(FileName))
 
